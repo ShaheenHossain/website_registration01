@@ -600,12 +600,12 @@
         <input type="hidden" t-if="len(product.product_variant_ids) == 1" class="product_id" name="product_id" t-att-value="product.product_variant_id.id"/>
         <t t-if="len(product.product_variant_ids) &gt; 1">
           <label label-default="label-default" class="radio" t-foreach="product.product_variant_ids" t-as="variant_id">
-            <input type="radio" name="product_id" class="js_product_change" t-att-checked="'checked' if variant_id_index == 0 else None" t-att-value="variant_id.id" t-att-data-lst_price="compute_currency(variant_id.lst_price)" t-att-data-price="variant_id.price"/>
+            <input type="radio" name="product_id" class="js_product_change" t-att-checked="'checked' if variant_id_index == 0 else None" t-att-value="variant_id.id"/>
             <span t-esc="variant_id.name_get()[0][1]"/>
-            <t t-set="diff_price" t-value="variant_id.price - variant_id.product_tmpl_id.price"/>
+<!--            <t t-set="diff_price" t-value="variant_id.price - variant_id.product_tmpl_id.price"/>
             <span class="badge" t-if="diff_price != 0">
               <t t-esc="diff_price > 0 and '+' or '-'"/><span t-esc="abs(diff_price)" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
-            </span>
+            </span>-->
           </label>
         </t>
         <t t-else="">
@@ -628,13 +628,13 @@
                 <t t-foreach="variant_id.value_ids" t-as="value_id">
                   <option t-att-value="value_id.id">
                       <span t-field="value_id.name"/>
-                      <span t-if="value_id.price_extra">
+<!--                      <span t-if="value_id.price_extra">
                           <t t-esc="value_id.price_extra > 0 and '+' or ''"/><span t-field="value_id.price_extra" style="white-space: nowrap;" t-options='{
                                    "widget": "monetary",
                                     "from_currency": product.currency_id,
                                    "display_currency": website.currency_id
                                }'/>
-                      </span>
+                      </span>-->
                   </option>
                 </t>
               </select>
@@ -648,13 +648,13 @@
                           <label class="control-label" style="margin: 0 20px;">
                               <input type="radio" t-att-class="'js_variant_change' if variant_id.attribute_id.create_variant else None" t-att-checked="'checked' if not inc else None" t-att-name="'attribute-%s-%s' % (product.id, variant_id.attribute_id.id)" t-att-value="value_id.id" style="vertical-align: top; margin-right: 10px;"/>
                               <span t-field="value_id.name"/>
-                              <span class="badge" t-if="value_id.price_extra">
+<!--                              <span class="badge" t-if="value_id.price_extra">
                                   <t t-esc="value_id.price_extra > 0 and '+' or ''"/><span t-field="value_id.price_extra" style="white-space: nowrap;" t-options='{
                                           "widget": "monetary",
                                           "from_currency": product.currency_id,
                                           "display_currency": website.currency_id
                                        }'/>
-                              </span>
+                              </span>-->
                           </label>
                       </li>
                       <t t-set="inc" t-value="inc+1"/>
@@ -811,14 +811,14 @@
           Your cart is empty!
         </div>
         <table class="table table-striped table-condensed js_cart_lines" id="cart_products" t-if="website_sale_order and website_sale_order.website_order_line">
-            <thead>
+<!--            <thead>
                 <tr>
                     <th class="td-img">Object</th>
                     <th></th>
                     <th class="text-center td-qty">Object</th>
                     <th class="text-center td-price">Amount</th>
                 </tr>
-            </thead>
+            </thead>-->
             <tbody>
                 <t t-foreach="website_sale_order.website_order_line" t-as="line">
                     <tr>
@@ -850,13 +850,13 @@
                                 </a>
                             </div>
                         </td>
-                        <td class="text-center td-price" name="price">
+<!--                        <td class="text-center td-price" name="price">
                             <t t-if="(compute_currency(line.product_id.lst_price) - line.price_reduce ) &gt; 0.01  and website.get_current_pricelist().discount_policy=='without_discount'">
                                 <del t-attf-class="#{'text-danger mr8'}" style="white-space: nowrap;" t-esc="compute_currency(line.product_id.website_public_price)" t-options="{'widget': 'monetary', 'display_currency': website.get_current_pricelist().currency_id, 'from_currency': website.currency_id}" />
                             </t>
                             <span t-field="line.price_reduce_taxexcl" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'from_currency': website_sale_order.pricelist_id.currency_id, 'display_currency': website.currency_id}" groups="sale.group_show_price_subtotal" />
                             <span t-field="line.price_reduce_taxinc" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'from_currency': website_sale_order.pricelist_id.currency_id, 'display_currency': website.currency_id}" groups="sale.group_show_price_total" />
-                        </td>
+                        </td>-->
                     </tr>
                 </t>
             </tbody>
@@ -966,12 +966,12 @@
                             </div>
                             <div class="text-muted hidden-xs" t-field="product.description_sale" />
                         </td>
-                        <td class='td-price'>
+<!--                        <td class='td-price'>
                             <t t-if="product.website_price_difference  and website.get_current_pricelist().discount_policy=='without_discount'">
                                 <del class="text-danger mr8" style="white-space: nowrap;" t-field="product.lst_price" t-options="{'widget': 'monetary','from_currency': product.currency_id, 'display_currency': website.currency_id}" />
                             </t>
                             <span t-field="product.website_price" style="white-space: nowrap;" t-options="{'widget': 'monetary','display_currency': website.currency_id}" />
-                        </td>
+                        </td>-->
                         <td class="col-md-2 col-sm-3 col-xs-4 text-center">
                             <input class="js_quantity" name="product_id" t-att-data-product-id="product.id" type="hidden" />
                             <a class="btn btn-link js_add_suggested_products">
@@ -1269,14 +1269,14 @@
                             <div class='col-md-12 o_website_sale_rightfit'>
                                 <h2 class="mb8 mt8">Confirm Order</h2>
                                 <table class="table table-striped table-condensed" id="cart_products" t-if="website_sale_order and website_sale_order.website_order_line">
-                                    <thead>
+<!--                                    <thead>
                                         <tr>
                                             <th class='td-img'>Object</th>
                                             <th></th>
                                             <th class='td-qty'>Object</th>
                                             <th class='text-center td-price'>Amount</th>
                                         </tr>
-                                    </thead>
+                                    </thead>-->
                                     <tbody>
                                         <tr t-foreach="website_sale_order.website_order_line" t-as="line">
                                             <td class='' colspan="2" t-if="not line.product_id.product_tmpl_id"></td>
@@ -1295,13 +1295,13 @@
                                                     </t>
                                                 </div>
                                             </td>
-                                            <td class='td-qty'>
+                          <!--                  <td class='td-qty'>
                                               <div t-esc="int(line.product_uom_qty) == line.product_uom_qty and int(line.product_uom_qty) or line.product_uom_qty" />
                                             </td>
                                             <td class="text-center td-price">
                                               <span t-field="line.price_reduce_taxexcl" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'from_currency': website_sale_order.pricelist_id.currency_id, 'display_currency': website.currency_id}" groups="sale.group_show_price_subtotal" />
                                               <span t-field="line.price_reduce_taxinc" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'from_currency': website_sale_order.pricelist_id.currency_id, 'display_currency': website.currency_id}" groups="sale.group_show_price_total" />
-                                            </td>
+                                            </td>-->
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1391,14 +1391,14 @@
                                         <strong>Details:</strong>
                                     </h3>
                                     <table class="table table-striped table-condensed">
-                                        <thead>
+<!--                                        <thead>
                                             <tr>
                                                 <th class='td-product_name'>Object</th>
                                                 <th class='td-qty'>Object</th>
                                                 <th class="text-right td-price">Unit Amount</th>
                                                 <th class="text-right td-price-total">Subtotal</th>
                                             </tr>
-                                        </thead>
+                                        </thead>-->
                                         <tbody>
                                           <tr t-foreach="order.order_line" t-as="line">
                                               <td class='td-product_name'>
@@ -1468,12 +1468,14 @@
                                                 <td colspan="2">
                                                     <t t-esc="order.payment_acquirer_id.name" />
                                                 </td>
+<!--
                                                 <td class="text-right" width="100">
                                                     <strong>Total:</strong>
                                                 </td>
                                                 <td class="text-right" width="100">
                                                     <strong t-field="order.amount_total" t-options="{'widget': 'monetary', 'display_currency': order.pricelist_id.currency_id}" />
                                                 </td>
+-->
                                             </tr>
                                         </tbody>
                                     </table>
@@ -1513,13 +1515,13 @@
                     <span t-field="website_sale_order.amount_tax" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'from_currency': website_sale_order.pricelist_id.currency_id, 'display_currency': website.currency_id}" />
                 </span>
             </div> -->
-            <div class="row" id="order_total">
+<!--            <div class="row" id="order_total">
                 <hr class="mt8 mb0"/>
                 <span class="col-xs-6 text-right h4 mt0">Total:</span>
                 <span class="col-xs-6 text-right-not-xs text-left-xs h4 mt0" style="white-space: nowrap;">
                     <span t-field="website_sale_order.amount_total" style="white-space: nowrap;" t-options="{'widget': 'monetary','from_currency': website_sale_order.pricelist_id.currency_id,'display_currency': website.currency_id}" />
                 </span>
-            </div>
+            </div>-->
         </div>
     </template>
 
