@@ -8,7 +8,7 @@
         </xpath>
     </template>
 
-    <template id="assets_frontend" inherit_id="website.assets_frontend" name="Shop">
+    <template id="assets_frontend" inherit_id="website.assets_frontend" name="Object">
         <xpath expr="." position="inside">
             <link rel="stylesheet" href="/website_sale/static/src/css/website_sale.css" />
             <link rel="stylesheet" href="/website_sale/static/src/css/website_mail.css" />
@@ -21,7 +21,7 @@
         </xpath>
     </template>
 
-    <template id="assets_editor" inherit_id="website.assets_editor" name="Shop Editor">
+    <template id="assets_editor" inherit_id="website.assets_editor" name="Object Editor">
         <xpath expr="." position="inside">
             <script type="text/javascript" src="/website_sale/static/src/js/website_sale.editor.js"></script>
         </xpath>
@@ -33,7 +33,7 @@
         </xpath>
     </template>
 
-    <template id="header" inherit_id="website.layout" name="Header Shop My Cart Link">
+    <template id="header" inherit_id="website.layout" name="Header Object My Cart Link">
         <xpath expr="//header//ul[@id='top_menu']/li" position="before">
             <t t-set="website_sale_order" t-value="website.sale_get_order()" />
             <li id="my_cart" t-att-class="'' if website_sale_order and website_sale_order.cart_quantity else 'hidden'">
@@ -106,7 +106,7 @@
                             <a itemprop="name" t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))" t-att-content="product.name" t-field="product.name" />
                         </strong>
                     </h5>
-                    <div itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer" class="product_price" t-if="product.product_variant_ids">
+<!--                    <div itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer" class="product_price" t-if="product.product_variant_ids">
                         <b>
                             <t t-if="product.website_price_difference and website.get_current_pricelist().discount_policy=='without_discount'">
                                 <del class="text-danger mr8" style="white-space: nowrap;" t-esc="compute_currency(product.website_public_price)" t-options="{'widget': 'monetary', 'display_currency': website.get_current_pricelist().currency_id, 'from_currency': website.currency_id}" />
@@ -116,7 +116,7 @@
                             <span itemprop="price" style="display:none;" t-esc="product.website_price" />
                             <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name" />
                         </b>
-                    </div>
+                    </div>-->
                 </section>
             </div>
         </form>
@@ -167,7 +167,7 @@
     <!-- /shop product listing -->
     <template id="products" name="Objects">
         <t t-call="website.layout">
-            <t t-set="additional_title">Shop</t>
+            <t t-set="additional_title">Object</t>
             <div id="wrap" class="js_sale">
                 <div class="oe_structure" />
                 <div class="container oe_website_sale">
@@ -464,7 +464,8 @@
                                             <t t-set="ul_class" t-value="'nav-stacked'" />
                                         </t>
                                     </t>
-                                    <t t-call="website_sale.product_price" />
+<!--                                    <t t-call="website_sale.product_price" />-->
+
                                     <p t-if="len(product.product_variant_ids) &gt; 1" class="css_not_available_msg bg-danger" style="padding: 15px;">This combination does not exist.</p>
                                     <a id="add_to_cart" class="btn btn-primary btn-lg mt8 js_check_product a-submit" href="#">Start to Process</a>
                                 </div>
@@ -559,7 +560,7 @@
         </xpath>
     </template>
 
-    <template id="product_quantity" inherit_id="website_sale.product" customize_show="True" name="Select Quantity">
+<!--    <template id="product_quantity" inherit_id="website_sale.product" customize_show="True" name="Select Object">
       <xpath expr="//a[@id='add_to_cart']" position="before">
         <div class="css_quantity input-group oe_website_spinner" contenteditable="false">
             <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json">
@@ -571,9 +572,9 @@
             </a>
         </div>
       </xpath>
-    </template>
+    </template>-->
 
-    <template id="product_price">
+<!--    <template id="product_price">
       <div itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer" class="product_price mt16">
           <h4 class="oe_price_h4 css_editable_mode_hidden">
               <span class="text-danger oe_default_price" style="text-decoration: line-through; white-space: nowrap;"
@@ -592,7 +593,7 @@
           </h4>
           <h4 class="hidden oe_not_available bg-warning">Object not available</h4>
       </div>
-    </template>
+    </template>-->
 
     <template id="product_variants" inherit_id="website_sale.product" active="False" customize_show="True" name="List View of Variants">
       <xpath expr="//t[@t-placeholder='select']" position="replace">
@@ -814,8 +815,8 @@
                 <tr>
                     <th class="td-img">Object</th>
                     <th></th>
-                    <th class="text-center td-qty">Quantity</th>
-                    <th class="text-center td-price">Price</th>
+                    <th class="text-center td-qty">Object</th>
+                    <th class="text-center td-price">Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -1011,7 +1012,7 @@
 
     <template id="checkout">
         <t t-call="website.layout">
-            <t t-set="additional_title">Shop - Checkout</t>
+            <t t-set="additional_title">Object - Checkout</t>
             <t t-set="no_footer">1</t>
             <div id="wrap">
                 <div class="container oe_website_sale">
@@ -1242,7 +1243,7 @@
     </template>
     <template id="payment" name="Payment">
         <t t-call="website.layout">
-            <t t-set="additional_title">Shop - Select Payment Acquirer</t>
+            <t t-set="additional_title">Object - Select Payment Acquirer</t>
             <t t-set="no_footer">1</t>
 
             <div id="wrap">
@@ -1272,8 +1273,8 @@
                                         <tr>
                                             <th class='td-img'>Object</th>
                                             <th></th>
-                                            <th class='td-qty'>Quantity</th>
-                                            <th class='text-center td-price'>Price</th>
+                                            <th class='td-qty'>Object</th>
+                                            <th class='text-center td-price'>Amount</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1370,14 +1371,14 @@
 
     <template id="confirmation">
         <t t-call="website.layout">
-            <t t-set="additional_title">Shop - Confirmed</t>
+            <t t-set="additional_title">Object - Confirmed</t>
             <div id="wrap">
                 <div class="container oe_website_sale">
                     <div class="row">
                         <div class="col-md-9">
                             <h1 class="mb32"><span>Order</span> <em t-field="order.name" /> <t t-if="order.state == 'sale'"><span>Confirmed</span></t></h1>
                             <div class="thanks_msg">
-                                <h2>Thank you for your order.
+                                <h2>Thank you.
                                     <a class="btn btn-primary pull-right hidden-xs" href="/shop/print" target="_blank"><i class="fa fa-print"></i> Print</a>
                                 </h2>
                             </div>
@@ -1387,14 +1388,14 @@
                             <div class="col-md-9">
                                 <div class="oe_cart">
                                     <h3 class="mt32 text-left">
-                                        <strong>Order Details:</strong>
+                                        <strong>Details:</strong>
                                     </h3>
                                     <table class="table table-striped table-condensed">
                                         <thead>
                                             <tr>
                                                 <th class='td-product_name'>Object</th>
-                                                <th class='td-qty'>Quantity</th>
-                                                <th class="text-right td-price">Unit Price</th>
+                                                <th class='td-qty'>Object</th>
+                                                <th class="text-right td-price">Unit Amount</th>
                                                 <th class="text-right td-price-total">Subtotal</th>
                                             </tr>
                                         </thead>
@@ -1418,49 +1419,49 @@
                                                       <span class='hidden-xs' t-field="line.product_uom" groups="product.group_uom"/>
                                                   </div>
                                               </td>
-                                              <td class='td-price'>
+<!--                                              <td class='td-price'>
                                                   <span class="text-right">
                                                       <div t-field="line.price_unit"
                                                           t-options='{"widget": "monetary", "display_currency": order.pricelist_id.currency_id}'/>
                                                   </span>
-                                              </td>
-                                              <td class='td-price-total'>
+                                              </td>-->
+<!--                                              <td class='td-price-total'>
                                                   <div class="text-right"
                                                       t-field="line.price_subtotal"
                                                       t-options='{"widget": "monetary", "display_currency": order.pricelist_id.currency_id}'/>
-                                              </td>
+                                              </td>-->
                                           </tr>
                                         </tbody>
                                     </table>
                                     <table class='table'>
-                                      <tr>
+<!--                                      <tr>
                                           <td class="col-md-8"></td>
                                           <td class="text-right-not-xs text-left-xs col-sm-2 col-xs-3">Subtotal:</td>
                                           <td class="text-right col-sm-2 col-xs-3">
                                               <span t-field="order.amount_untaxed" style="white-space: nowrap;" t-options="{'widget': 'monetary','from_currency': order.pricelist_id.currency_id,'display_currency': website.currency_id}" />
                                           </td>
-                                      </tr>
-                                      <tr>
+                                      </tr>-->
+<!--                                      <tr>
                                           <td class='noborder'></td>
                                           <td class="text-right noborder">Taxes:</td>
                                           <td class="text-right-not-xs text-left-xs noborder">
                                                <span t-field="order.amount_tax" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'from_currency': order.pricelist_id.currency_id, 'display_currency': website.currency_id}" />
                                           </td>
-                                      </tr>
-                                      <tr>
+                                      </tr> -->
+<!--                                      <tr>
                                           <td class='noborder'></td>
                                           <td class="text-right"><strong>Total:</strong></td>
                                           <td class="text-right-not-xs text-left-xs">
                                               <strong t-field="order.amount_total"
                                                   t-options='{"widget": "monetary", "display_currency": order.pricelist_id.currency_id}'/>
                                           </td>
-                                      </tr>
+                                      </tr>-->
                                     </table>
                                     <div class="clearfix" />
                                     <div class="oe_structure" />
-                                    <h3 class="text-left">
+                                    <!--<h3 class="text-left">
                                         <strong>Payment Information:</strong>
-                                    </h3>
+                                    </h3>-->
                                     <table class="table">
                                         <tbody>
                                             <tr>
@@ -1500,18 +1501,18 @@
 
     <template id="total">
         <div id="cart_total" t-att-class="extra_class or ''" t-if="website_sale_order and website_sale_order.website_order_line">
-            <div class="row" id="order_total_untaxed">
+            <!--<div class="row" id="order_total_untaxed">
                 <span class="col-xs-6 text-right text-muted">Subtotal:</span>
                 <span class="col-xs-6 text-right-not-xs text-left-xs text-muted">
                     <span t-field="website_sale_order.amount_untaxed" style="white-space: nowrap;" t-options="{'widget': 'monetary','from_currency': website_sale_order.pricelist_id.currency_id,'display_currency': website.currency_id}" />
                 </span>
-            </div>
-            <div class="row" id="order_total_taxes">
+            </div>-->
+<!--            <div class="row" id="order_total_taxes">
                 <span class="col-xs-6 text-right text-muted" title="Taxes may be updated after providing shipping address"> Taxes:</span>
                 <span class="col-xs-6 text-right-not-xs text-left-xs text-muted">
                     <span t-field="website_sale_order.amount_tax" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'from_currency': website_sale_order.pricelist_id.currency_id, 'display_currency': website.currency_id}" />
                 </span>
-            </div>
+            </div> -->
             <div class="row" id="order_total">
                 <hr class="mt8 mb0"/>
                 <span class="col-xs-6 text-right h4 mt0">Total:</span>
@@ -1522,7 +1523,7 @@
         </div>
     </template>
 
-    <template id="reduction_code" inherit_id="website_sale.total" active="False" customize_show="True" name="Promo Code">
+<!--    <template id="reduction_code" inherit_id="website_sale.total" active="False" customize_show="True" name="Promo Code">
         <xpath expr="//div[@id='cart_total']" position="after">
             <div class='col-xs-12 col-sm-6 col-sm-pull-5 text-muted' t-if="not hide_coupon and website_sale_order and website_sale_order.website_order_line" id="coupon_box">
                 <p>
@@ -1531,7 +1532,7 @@
                 <t t-call='website_sale.coupon_form'/>
             </div>
         </xpath>
-    </template>
+    </template>-->
 
     <template id="payment_confirmation_status">
         <div class="oe_website_sale_tx_status" t-att-data-order-id="order.id">
